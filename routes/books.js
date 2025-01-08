@@ -15,6 +15,11 @@ router.get('/', (req, res) => {
     // Logic is here
 });
 
+//Render the add/update book form
+router.get('/form', (req, res) => {
+    res.render('form');
+});
+
 //Add a new book
 router.post('/', (req, res) => {
     // Logic is here
