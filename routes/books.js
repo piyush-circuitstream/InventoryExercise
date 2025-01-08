@@ -4,6 +4,14 @@ const router = express.Router();
 
 //Get list of books
 router.get('/', (req, res) => {
+    let booksList = [
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" },
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" },
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" },
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" }
+    ];
+
+    res.render('books', { books: booksList });
     // Logic is here
 });
 
