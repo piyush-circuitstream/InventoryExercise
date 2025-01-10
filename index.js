@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); //Requried to parse the incoming form data which is in url-encoded form. 
 app.use(express.json());
 
-app.use('/', bookRouter);
+app.use('/books', bookRouter);
 
 async function startApp() {
     try {

@@ -1,37 +1,45 @@
 const express = require('express');
+const { Book } = require('../models');
 
 const router = express.Router();
 
 //Get list of books
-router.get('/', (req, res) => {
-    let booksList = [
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] },
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] },
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] },
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] }
-    ];
-
-    res.render('books', { books: booksList });
-    // Logic is here
+router.get('/', async (req, res) => {
+    const books = await Book.find();
+    res.render('books', { books });
 });
 
-//Render the add/update book form
-router.get('/form', (req, res) => {
+//Render the add book form
+router.get('/add', (req, res) => {
     res.render('form', { title: 'Add a new book', action: '/add' });
 });
 
 //Add a new book
-router.post('/', (req, res) => {
+router.post('/add', async (req, res) => {
     // Logic is here
+    try {
+        const tags = req.body.tags.split(',');
+        req.body.tags = tags;
+        await Book.create(req.body);
+        res.render('form', { title: 'Add a new book', action: '/add', message: 'Book added successfully!' });
+    } catch (err) {
+        res.render('form', { title: 'Add a new book', action: '/add', message: `Error while adding book! Please try again! :( ${err}` });
+    }
+});
+
+//Render the update book form
+router.get('/edit/:id', async (req, res) => {
+    const book = await Book.find({ _id: req.params.id })
+    res.render('form', { title: 'Edit a book', action: `/edit/${req.params.id}`, book });
 });
 
 //Update an existing book
-router.put('/', (req, res) => {
+router.put('/edit/:id', async (req, res) => {
     // Logic is here
 });
 
 //Delete a book
-router.delete('/', (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     // Logic is here
 });
 
