@@ -1,12 +1,43 @@
 <%- include('./partials/header') %>
-    <!-- Form for Add book -->
-    <form>
-        <input type="text" placeholder="Enter Book Title Here..." id="title" class="">
-        <input type="text" placeholder="Enter Book ISBN Here..." id="isbn" class="">
-        <input type="text" placeholder="Enter Book Publisher Here..." id="publisher" class="">
-        <input type="text" placeholder="Enter Book Inventory Here..." id="inventory" class="">
-        <input type="text" placeholder="Enter Book Units Sold Here..." id="unitsSold" class="">
-        <input type="text" placeholder="Enter Book Tags with comma separated values here..." id="tags" class="">
-        <button type="submit" id="submitBook" class="">Submit</button>
+    <h2>
+        <%= title %>
+    </h2>
+    <!-- Form for Add/Update book -->
+    <form method="POST" action="<%= action %>">
+        <div>
+            <!-- Need name as well as id for data to be received by Express -->
+            <label class="form-label">Title:
+                <input class="form-control" type="text" name="title" id="title" <% if(locals.book) { %> value="<%=
+                    book.title %>" <% } %> />
+            </label>
+        </div>
+        <div>
+            <label class="form-label">ISBN:
+                <input class="form-control" type="isbn" name="isbn" id="isbn" <% if(locals.book) { %> value="<%=
+                    book.isbn %>" <% } %> /></label>
+        </div>
+        <div>
+            <label class="form-label">Publisher:
+                <input class="form-control" type="text" name="publisher" id="publisher" <% if(locals.book) { %> value="
+                <%= book.publisher %>" <% } %> />
+            </label>
+        </div>
+        <div>
+            <label class="form-label">Inventory:
+                <input class="form-control" type="number" name="inventory" id="inventory" <% if(locals.book) { %>
+                value="<%= book.inventory %>" <% } %> /></label>
+        </div>
+        <div>
+            <label class="form-label">Units sold:
+                <input class="form-control" type="number" name="unitsSold" id="unitsSold" <% if(locals.book) { %>
+                value="<%= book.unitsSold %>" <% } %> /></label>
+        </div>
+        <div>
+            <label class="form-label">Tags (comma separated):
+                <input class="form-control" type="text" name="tags" id="tags" <% if(locals.book) { %> value="<%=
+                    book.tags %>" <% } %> /></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
     </form>
     <%- include('./partials/footer') %>

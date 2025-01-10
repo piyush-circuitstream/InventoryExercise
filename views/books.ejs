@@ -1,10 +1,38 @@
 <%- include('./partials/header') %>
 
     <!-- Cards for every book -->
-    <div class="">
-        <!-- Iterate through the list of books -->
-        <% for(int i=0; i < books.length; i++) {%>
-            
-            <% } % </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% for (let i=0; i < books.length; i++) { %>
+            <div class="col">
+                <div class="card m-2 p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= books[i].title %>
+                        </h5>
+                        <p class="card-subtitle">
+                            <%= books[i].isbn %>
+                        </p>
+                        <p class="card-text">
+                            <% for (let j=0; j < books[i].tags.length; j++) { %>
+                                <span class="badge text-bg-secondary">
+                                    <%= books[i].tags[j] %>
+                                </span>
+                                <% } %>
+                        </p>
+                        <p class="text-secondary">
+                            <%= books[i].publisher %>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a class="btn btn-secondary">Edit book</a>
+                            </form>
+                            <form method="POST">
+                                <input class="btn btn-danger" type="submit" class="btn-danger" value="Delete book">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+    </div>
 
-                <%- include('./partials/footer') %>
+    <%- include('./partials/footer') %>

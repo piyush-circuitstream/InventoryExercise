@@ -5,10 +5,10 @@ const router = express.Router();
 //Get list of books
 router.get('/', (req, res) => {
     let booksList = [
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" },
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" },
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" },
-        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: "Drama,Fiction" }
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] },
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] },
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] },
+        { title: "Title1", isbn: "1234567", publisher: "ABC", inventory: 5, unitsSold: 1, tags: ['Drama', 'Fiction'] }
     ];
 
     res.render('books', { books: booksList });
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 //Render the add/update book form
 router.get('/form', (req, res) => {
-    res.render('form');
+    res.render('form', { title: 'Add a new book', action: '/add' });
 });
 
 //Add a new book
