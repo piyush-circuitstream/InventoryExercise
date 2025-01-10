@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
     res.render('books', { books });
 });
 
-//Render the add book form
+//Render the add book form (URL: http://localhost:3000/books/add)
 router.get('/add', (req, res) => {
-    res.render('form', { title: 'Add a new book', action: '/add' });
+    res.render('form', { title: 'Add a new book', action: '/books/add' }); //POST request on (URL: http://localhost:3000/books/add)
 });
 
 //Add a new book
@@ -30,11 +30,11 @@ router.post('/add', async (req, res) => {
 //Render the update book form
 router.get('/edit/:id', async (req, res) => {
     const book = await Book.find({ _id: req.params.id })
-    res.render('form', { title: 'Edit a book', action: `/edit/${req.params.id}`, book });
+    res.render('form', { title: 'Edit a book', action: `/books/edit/${req.params.id}`, book }); //localhost:3000/books/edit/:id
 });
 
 //Update an existing book
-router.put('/edit/:id', async (req, res) => {
+router.post('/edit/:id', async (req, res) => {
     // Logic is here
 });
 

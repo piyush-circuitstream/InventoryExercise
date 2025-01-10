@@ -23,9 +23,9 @@
                             <%= books[i].publisher %>
                         </p>
                         <div class="d-flex justify-content-between">
-                            <a class="btn btn-secondary">Edit book</a>
+                            <a href="/books/edit/<%= books[i]._id %>" class="btn btn-secondary">Edit book</a>
                             </form>
-                            <form method="POST">
+                            <form method="POST" action="/books/delete/<%= books[i]._id %>">
                                 <input class="btn btn-danger" type="submit" class="btn-danger" value="Delete book">
                             </form>
                         </div>
