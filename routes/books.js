@@ -21,16 +21,15 @@ router.post('/add', async (req, res) => {
         const tags = req.body.tags.split(',');
         req.body.tags = tags;
         await Book.create(req.body);
-        res.render('form', { title: 'Add a new book', action: '/add', message: 'Book added successfully!' });
+        res.render('form', { title: 'Add a new book', action: '/books/add', message: 'Book added successfully!' });
     } catch (err) {
-        res.render('form', { title: 'Add a new book', action: '/add', message: `Error while adding book! Please try again! :( ${err}` });
+        res.render('form', { title: 'Add a new book', action: '/books/add', message: `Error while adding book! Please try again! :( ${err}` });
     }
 });
 
 //Render the update book form
 router.get('/edit/:id', async (req, res) => {
     const book = await Book.findOne({ _id: req.params.id });
-    console.log(book);
     res.render('form', { title: 'Edit a book', action: `/books/edit/${req.params.id}`, book: book }); //localhost:3000/books/edit/:id
 });
 
@@ -49,11 +48,13 @@ router.post('/edit/:id', async (req, res) => {
 });
 
 //Delete a book
-router.delete('/delete/:id', async (req, res) => {
+router.post('/delete/:id', async (req, res) => {
     // Logic is here
     try {
-        await Book.deleteOne({ _id: req.params.id })
-        res.redirect('/')
+        await Book.deleteOne({ _id: req.params.id });
+        const books = await Book.find();
+        res.redirect('/books');
+        // res.render('books', { books, message: `Book deleted` })
     } catch (error) {
         const books = await Book.find()
         res.render('books', { books, message: `Hit an error while deleting the book. ${error}` })
